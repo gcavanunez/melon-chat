@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	modules: [
-		"@sidebase/nuxt-auth",
+		// "@sidebase/nuxt-auth",
 		"@nuxt/devtools",
 		"@nuxtjs/color-mode",
 		"@vueuse/nuxt",

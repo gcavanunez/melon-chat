@@ -1,0 +1,49 @@
+{
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"lint": "eslint --max-warnings 0 .",
+		"typecheck": "nuxt typecheck",
+		"start": "NODE_ENV=production node .output/server/index.mjs",
+		"dev:ws": "partykit dev"
+	},
+	"devDependencies": {
+		"@nuxt/devtools": "^0.8.2",
+		"@nuxtjs/color-mode": "^3.3.0",
+		"@nuxtjs/eslint-config-typescript": "^12.1.0",
+		"@sidebase/nuxt-auth": "^0.6.0-beta.3",
+		"@types/node": "^20.5.9",
+		"@vue/eslint-config-prettier": "^8.0.0",
+		"autoprefixer": "^10.4.14",
+		"eslint": "^8.33.0",
+		"nuxt": "^3.7.0",
+		"postcss": "^8.4.29",
+		"prettier": "^3.0.3",
+		"prettier-plugin-tailwindcss": "^0.5.4",
+		"prisma": "^5.0.0",
+		"tailwindcss": "^3.3.3",
+		"typescript": "^5.1.6",
+		"vue-tsc": "^1.0.24"
+	},
+	"dependencies": {
+		"@faker-js/faker": "^8.0.2",
+		"@prisma/client": "^5.0.0",
+		"@tailwindcss/forms": "^0.5.6",
+		"@trpc/client": "^10.38.1",
+		"@trpc/server": "^10.38.1",
+		"@vueuse/core": "^10.4.1",
+		"@vueuse/nuxt": "^10.4.1",
+		"date-fns": "^2.30.0",
+		"nanoid": "^4.0.2",
+		"next-auth": "4.22.5",
+		"partykit": "^0.0.7",
+		"partysocket": "^0.0.3",
+		"superjson": "^1.12.2",
+		"trpc-nuxt": "^0.10.6",
+		"zod": "^3.21.4"
+	}
+}

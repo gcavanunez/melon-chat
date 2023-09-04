@@ -1,0 +1,7 @@
+{
+	"name": "melon-chat",
+	"main": "party/server.ts",
+	"build": {
+		"watch": "party"
+	}
+}

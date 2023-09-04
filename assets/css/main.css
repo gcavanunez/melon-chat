@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	background-color: theme("backgroundColor.gray.950");
+}
+html,
+body,
+#__nuxt {
+	height: 100%;
+}

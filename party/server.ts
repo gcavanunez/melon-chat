@@ -16,7 +16,7 @@ export default {
 		// connection.send("Hello, world!"); // Send a message to the client
 
 		connection.addEventListener("message", (event) => {
-			console.log(event.data); // Log a message from the client
+			console.info(event.data); // Log a message from the client
 			const payload = parseEvent(event.data);
 			if (payload.event === "send-message") {
 				const safeData = payload.payload;
@@ -58,7 +58,7 @@ export default {
 				},
 			});
 			party.broadcast(pong);
-			console.log("closed");
+			console.info("closed");
 		});
 
 		// everyone already connected needs to get the new user
@@ -86,18 +86,18 @@ export default {
 	},
 	onRequest(_req: PartyRequest, party: Party) {
 		// ...
-		console.log(party.env);
+		console.info(party.env);
 
-		// console.log(process.env.WHATUP);
-		console.log(party.context.parties);
+		// console.info(process.env.WHATUP);
+		console.info(party.context.parties);
 		// const res = await room.parties.xyz.get("some-id").fetch();
-		// console.log("gottt", await res.text());
+		// console.info("gottt", await res.text());
 		// const wssss = room.parties.xyz.get("some-id").connect();
 		// room.addEventListener("message", (evt) => {
-		// 	console.log("got a message from xyz", evt.data);
+		// 	console.info("got a message from xyz", evt.data);
 		// });
 
-		// console.log(SOME_GLOBAL);
+		// console.info(SOME_GLOBAL);
 		party.broadcast("Yoo from");
 		return new Response("Hello world:" + party.id);
 		// s

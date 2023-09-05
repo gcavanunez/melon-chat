@@ -255,7 +255,7 @@ const tooltip = ref(false);
 					<form @submit.prevent="mutateProfile">
 						<fieldset class="mb-[15px] flex items-center gap-5">
 							<label
-								class="text-grass11 w-[90px] text-right text-[15px]"
+								class="text-grass11 w-[90px] text-right sm:text-[15px]"
 								for="name"
 							>
 								Name
@@ -263,7 +263,7 @@ const tooltip = ref(false);
 							<input
 								id="name"
 								v-model="form.name"
-								class="text-grass11 shadow-green7 focus:shadow-green8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+								class="text-grass11 shadow-green7 focus:shadow-green8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] sm:text-[15px]"
 							/>
 						</fieldset>
 						<div class="mt-[25px] flex justify-end">

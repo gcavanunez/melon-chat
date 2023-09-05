@@ -3,6 +3,7 @@ import PartySocket from "partysocket";
 import { faker } from "@faker-js/faker";
 import { format } from "date-fns";
 import { createPayload, parseEvent } from "~/party/events";
+// import { URL } from "ufo";
 const props = defineProps<{
 	room: string;
 }>();
@@ -151,7 +152,15 @@ const submit = () => {
 	);
 	body.value = "";
 };
+// console.log(config.app.cdnURL);
+const url = useRequestURL();
+const { copy } = useClipboard({
+	source: url.href,
+});
 
+const copyRoom = () => {
+	copy();
+};
 // *mutators
 // update profile
 
@@ -164,13 +173,45 @@ const submit = () => {
 			<!-- badge -->
 			<!-- profile -> name -->
 			<div>
-				room
-				<span
-					class="rounded bg-gray-600 px-1.5 py-0.5 font-mono text-gray-50 shadow"
-				>
-					{{ room }}
+				<!-- room -->
+				<span class="relative inline-flex">
+					<button
+						class="inline-flex items-center divide-x divide-gray-700 rounded bg-gray-600 font-mono text-gray-50 shadow"
+						@click="copyRoom"
+					>
+						<span class="flex items-center space-x-3 px-3 py-0.5">
+							<span>{{ users.size }}</span>
+						</span>
+						<span class="flex items-center space-x-2 px-2 py-0.5">
+							<span>{{ room }}</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="h-4 w-4"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
+								/>
+							</svg>
+						</span>
+					</button>
+					<span
+						class="absolute left-0 top-0 -ml-0.5 -mt-0.5 flex h-2 w-2"
+					>
+						<span
+							class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"
+						></span>
+						<span
+							class="relative inline-flex h-2 w-2 rounded-full bg-sky-500"
+						></span>
+					</span>
 				</span>
-				Connected {{ users.size }}
+				<!-- Connected  -->
 			</div>
 			<div class="hidden sm:block">
 				me -

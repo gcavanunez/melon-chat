@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
 	modules: [
 		// "@sidebase/nuxt-auth",
+		"radix-vue/nuxt",
 		"@nuxt/devtools",
 		"@nuxtjs/color-mode",
 		"@vueuse/nuxt",

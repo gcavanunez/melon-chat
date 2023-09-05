@@ -11,6 +11,7 @@ const props = defineProps<{
 const room = props.room;
 
 const body = ref("");
+const profileModal = ref(false);
 const messages = ref<
 	{ id: string; content: string; user_id: string; created_at: string }[]
 >([]);
@@ -90,6 +91,7 @@ const sortedMessages = computed(() => {
 const profile = useLocalStorage("profile", {
 	name: faker.person.firstName(),
 });
+const form = ref({ name: profile.value.name });
 const pk = ref("");
 const user = computed(() => ({
 	name: profile.value.name,
@@ -119,7 +121,7 @@ partySocket.value.addEventListener("message", (event) => {
 		console.log(res);
 	}
 	if (res.event === "broadcast-user") {
-		console.log(res);
+		console.log("broadcast-user", res);
 		users.value.set(res.payload.id, {
 			...res.payload,
 			avatar: `https://ui-avatars.com/api/?name=${res.payload.name}`,
@@ -154,17 +156,37 @@ const submit = () => {
 };
 // console.log(config.app.cdnURL);
 const url = useRequestURL();
-const { copy } = useClipboard({
+const { copy, copied } = useClipboard({
 	source: url.href,
 });
 
 const copyRoom = () => {
+	tooltip.value = true;
 	copy();
+};
+watch(copied, (newVal) => {
+	if (!newVal) {
+		tooltip.value = false;
+	}
+});
+const mutateProfile = () => {
+	console.log("update trigger");
+	profile.value.name = form.value.name;
+	partySocket.value?.send(
+		createPayload({
+			event: "update-profile",
+			payload: {
+				name: form.value.name,
+			},
+		}),
+	);
+	profileModal.value = false;
 };
 // *mutators
 // update profile
 
 // get message
+const tooltip = ref(false);
 </script>
 
 <template>
@@ -172,34 +194,43 @@ const copyRoom = () => {
 		<header class="flex h-10 items-center justify-between bg-white px-4">
 			<!-- badge -->
 			<!-- profile -> name -->
-			<div>
+			<div class="flex">
 				<!-- room -->
 				<span class="relative inline-flex">
-					<button
-						class="inline-flex items-center divide-x divide-gray-700 rounded bg-gray-600 font-mono text-gray-50 shadow"
-						@click="copyRoom"
-					>
-						<span class="flex items-center space-x-3 px-3 py-0.5">
-							<span>{{ users.size }}</span>
-						</span>
-						<span class="flex items-center space-x-2 px-2 py-0.5">
-							<span>{{ room }}</span>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="h-4 w-4"
+					<AppPopover v-model="tooltip">
+						<template #trigger>
+							<button
+								class="inline-flex items-center divide-x divide-gray-700 rounded bg-gray-600 font-mono text-gray-50 shadow"
+								@click="copyRoom"
 							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
-								/>
-							</svg>
-						</span>
-					</button>
+								<span
+									class="flex items-center space-x-3 px-3 py-0.5"
+								>
+									<span>{{ users.size }}</span>
+								</span>
+								<span
+									class="flex items-center space-x-2 px-2 py-0.5"
+								>
+									<span>{{ room }}</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="h-4 w-4"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
+										/>
+									</svg>
+								</span>
+							</button>
+						</template>
+						<div>Copied!</div>
+					</AppPopover>
 					<span
 						class="absolute left-0 top-0 -ml-0.5 -mt-0.5 flex h-2 w-2"
 					>
@@ -211,12 +242,40 @@ const copyRoom = () => {
 						></span>
 					</span>
 				</span>
-				<!-- Connected  -->
 			</div>
 			<div class="flex items-center">
-				<button class="h-8 w-8 overflow-hidden rounded-full">
-					<img :src="user.avatar" class="h-full w-full" />
-				</button>
+				<AppDialog v-model="profileModal">
+					<template #trigger>
+						<button
+							class="h-7 w-7 overflow-hidden rounded-full focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+						>
+							<img :src="user.avatar" class="h-full w-full" />
+						</button>
+					</template>
+					<form @submit.prevent="mutateProfile">
+						<fieldset class="mb-[15px] flex items-center gap-5">
+							<label
+								class="text-grass11 w-[90px] text-right text-[15px]"
+								for="name"
+							>
+								Name
+							</label>
+							<input
+								id="name"
+								v-model="form.name"
+								class="text-grass11 shadow-green7 focus:shadow-green8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+							/>
+						</fieldset>
+						<div class="mt-[25px] flex justify-end">
+							<button
+								type="submit"
+								class="bg-green4 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+							>
+								Save changes
+							</button>
+						</div>
+					</form>
+				</AppDialog>
 			</div>
 		</header>
 		<section class="flex h-[calc(100%-40px)] flex-col">

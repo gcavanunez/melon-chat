@@ -31,6 +31,7 @@
 	"dependencies": {
 		"@faker-js/faker": "^8.0.2",
 		"@prisma/client": "^5.0.0",
+		"@radix-ui/colors": "^2.1.0",
 		"@tailwindcss/forms": "^0.5.6",
 		"@trpc/client": "^10.38.1",
 		"@trpc/server": "^10.38.1",
@@ -40,6 +41,7 @@
 		"nanoid": "^4.0.2",
 		"partykit": "^0.0.7",
 		"partysocket": "^0.0.3",
+		"radix-vue": "^0.1.30",
 		"superjson": "^1.12.2",
 		"trpc-nuxt": "^0.10.6",
 		"zod": "^3.21.4"

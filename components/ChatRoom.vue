@@ -202,11 +202,11 @@ const submit = () => {
 						<input
 							v-model="body"
 							type="text"
-							class="relative w-full appearance-none rounded-md border border-zinc-950/10 bg-transparent px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] text-sm/6 placeholder:text-zinc-500 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-white"
+							class="relative w-full appearance-none rounded-md border border-zinc-950/10 bg-transparent px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] placeholder:text-zinc-500 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-white sm:text-sm/6"
 						/>
 					</span>
 					<button
-						class="relative isolate inline-flex rounded-md border border-transparent bg-indigo-600/90 px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] text-sm/6 font-semibold text-white before:bg-indigo-500 before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.md)-1px)] after:shadow-[inset_0_1px_#ffffff26] after:hover:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:before:-inset-px dark:before:rounded-md dark:before:border dark:before:border-white/5 dark:after:-inset-px dark:after:rounded-md"
+						class="relative isolate inline-flex rounded-md border border-transparent bg-indigo-600/90 px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] font-semibold text-white before:bg-indigo-500 before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.md)-1px)] after:shadow-[inset_0_1px_#ffffff26] after:hover:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:before:-inset-px dark:before:rounded-md dark:before:border dark:before:border-white/5 dark:after:-inset-px dark:after:rounded-md sm:text-sm/6"
 					>
 						Send
 					</button>

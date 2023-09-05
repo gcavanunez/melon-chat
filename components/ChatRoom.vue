@@ -213,9 +213,10 @@ const copyRoom = () => {
 				</span>
 				<!-- Connected  -->
 			</div>
-			<div class="hidden sm:block">
-				me -
-				<span :title="pk">{{ profile.name }}</span>
+			<div class="flex items-center">
+				<button class="h-8 w-8 overflow-hidden rounded-full">
+					<img :src="user.avatar" class="h-full w-full" />
+				</button>
 			</div>
 		</header>
 		<section class="flex h-[calc(100%-40px)] flex-col">

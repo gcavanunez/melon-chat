@@ -255,21 +255,29 @@ const tooltip = ref(false);
 					<form @submit.prevent="mutateProfile">
 						<fieldset class="mb-[15px] flex items-center gap-5">
 							<label
-								class="text-grass11 w-[90px] text-right sm:text-[15px]"
+								class="w-[90px] text-right text-white sm:text-[15px]"
 								for="name"
 							>
 								Name
 							</label>
-							<input
+							<!-- <input
 								id="name"
 								v-model="form.name"
-								class="text-grass11 shadow-green7 focus:shadow-green8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] sm:text-[15px]"
-							/>
+								class="inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] leading-none text-grass11 shadow-[0_0_0_1px] shadow-green7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-green8 sm:text-[15px]"
+							/> -->
+							<span
+								class="relative inline-block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.md)-1px)] before:bg-white before:shadow after:pointer-events-none after:absolute after:inset-0 after:rounded-md after:ring-inset after:ring-transparent after:focus-within:ring-2 after:focus-within:ring-blue-500 before:dark:inset-0 before:dark:rounded-md before:dark:bg-transparent"
+							>
+								<input
+									v-model="form.name"
+									type="text"
+									class="relative w-full appearance-none rounded-md border border-zinc-950/10 bg-transparent px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] placeholder:text-zinc-500 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-white sm:text-sm/6"
+								/>
+							</span>
 						</fieldset>
 						<div class="mt-[25px] flex justify-end">
 							<button
-								type="submit"
-								class="bg-green4 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+								class="relative isolate inline-flex rounded-md border border-transparent bg-blue-600/90 px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] font-semibold text-white before:bg-blue-500 before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.md)-1px)] after:shadow-[inset_0_1px_#ffffff26] after:hover:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:before:-inset-px dark:before:rounded-md dark:before:border dark:before:border-white/5 dark:after:-inset-px dark:after:rounded-md sm:text-sm/6"
 							>
 								Save changes
 							</button>
@@ -307,7 +315,7 @@ const tooltip = ref(false);
 						/>
 					</span>
 					<button
-						class="relative isolate inline-flex rounded-md border border-transparent bg-indigo-600/90 px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] font-semibold text-white before:bg-indigo-500 before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.md)-1px)] after:shadow-[inset_0_1px_#ffffff26] after:hover:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:before:-inset-px dark:before:rounded-md dark:before:border dark:before:border-white/5 dark:after:-inset-px dark:after:rounded-md sm:text-sm/6"
+						class="relative isolate inline-flex rounded-md border border-transparent bg-blue-600/90 px-[calc(theme(padding.3)-1px)] py-[calc(theme(padding[1.5])-1px)] font-semibold text-white before:bg-blue-500 before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.md)-1px)] after:shadow-[inset_0_1px_#ffffff26] after:hover:bg-white/10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:before:-inset-px dark:before:rounded-md dark:before:border dark:before:border-white/5 dark:after:-inset-px dark:after:rounded-md sm:text-sm/6"
 					>
 						Send
 					</button>
